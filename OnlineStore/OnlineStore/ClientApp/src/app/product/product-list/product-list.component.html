@@ -1,0 +1,39 @@
+<ll-product-hero></ll-product-hero>
+<div class="ll-products-area mb-24">
+  <div class="container">
+    <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="isLoaded">
+      <div *ngFor="let product of productsEntity" class="col-span-12 md:col-span-6 xl:col-span-4">
+        <mat-card class="ll-product">
+          <img mat-card-image [src]="product.image" alt="{{ product.code }}" style="width: 100%; height:300px;  margin: 0 0 20px" />
+          <mat-card-content class="flex">
+            <div class="flex-grow pl-3">
+              <h2 class="ll-product__name">
+                <a [routerLink]="['/products', product.articleId]">{{ product.code }}</a>
+              </h2>
+              <div class="flex justify-between mt-5">
+                <div class="ll-product__price-label">Prices:</div>
+                <div class="ll-product__price text-accent font-bold">${{ product.price }}</div>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions class="ll-product__action flex justify-between">
+            <div class="flex-1 text-center">
+              <a [routerLink]="['/products', product.articleId]" mat-raised-button color="warn" class="px-4">Leer más</a>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div *ngIf="!isLoaded">
+      <ngx-skeleton-loader 
+        count="9"
+        appearance="circle"
+        [theme]="{ 
+          'border-radius': '5px',
+          height: '280px',
+          width: 'calc(33% - 10px)'
+        }"
+      ></ngx-skeleton-loader>
+    </div>
+  </div>
+</div>
